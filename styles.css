@@ -2,8 +2,8 @@ body {
     font-family: Montserrat;
 }
 
-div.mainTable {
-    margin: 10px 6% 5px;
+main {
+    margin: 10px 3% 5px;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -11,7 +11,7 @@ div.mainTable {
 
 div.tableElement {
     padding: 7px;
-    width: 400px;
+    width: 95%;
     margin: 20px 40px 5px;
     border: 3px dotted transparent;
 }
@@ -28,10 +28,10 @@ input {
     border: none;
     color: lightyellow;
     background-color: darksalmon;
-    height: 42px;
+    height: 50px;
     width: 70%;
     font-family: inherit;
-    font-size: 25px;
+    font-size: 3vw;
     font-weight: 400;
     padding-left: 12px;
 }
@@ -42,18 +42,18 @@ input::placeholder {
 
 div.mainCity {
     font-weight: 700;
-    font-size: 35px;
+    font-size: 8vw;
 }
 
 div.mainTemp {
     font-weight: 300;
-    font-size: 50px;
+    font-size: 9vw;
 }
 
 div.nameBar {
     display: flex;
     font-weight: 700;
-    font-size: 25px;
+    font-size: 6vw;
     margin-bottom: 5px;
 }
 
@@ -63,12 +63,12 @@ div.nameBar div {
 
 div.nameBar span {
     font-weight: 300;
-    font-size: 30px;
+    font-size: 7vw;
     margin-left: 20px;
 }
 
 div.weatherInfo {
-
+    font-size: 3vw;
 }
 
 div.infoElement {
@@ -82,5 +82,39 @@ div.infoElement {
 
 div.title {
     font-weight: 400;
-    font-size: 35px;
+    font-size: 6vw;
+}
+
+@media screen and (min-width: 1080px) {
+    div.tableElement {
+        width: 400px;
+    }
+
+    input {
+        font-size: 20px;
+    }
+
+    div.mainCity {
+        font-size: 40px;
+    }
+
+    div.mainTemp {
+        font-size: 50px;
+    }
+
+    div.nameBar {
+        font-size: 35px;
+    }
+
+    div.nameBar span {
+        font-size: 45px;
+    }
+
+    div.weatherInfo {
+        font-size: 20px;
+    }
+
+    div.title {
+        font-size: 35px;
+    }
 }
