@@ -5,7 +5,7 @@ del, dfn, em, font, img, ins, kbd, q, s, samp,
 small, strike, strong, sub, sup, tt, var,
 dl, dt, dd, ol, ul, li,
 fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td {
+table, caption, tbody, tfoot, thead, tr, th, td, button {
     margin: 0;
     padding: 0;
     border: 0;
@@ -48,10 +48,11 @@ div.tableElement {
 
 input {
     border: none;
+    border-radius: 5px;
     color: lightyellow;
     background-color: darksalmon;
     height: 50px;
-    width: 70%;
+    width: 80%;
     font-family: inherit;
     font-size: 3vw;
     font-weight: 400;
@@ -86,12 +87,19 @@ div.nameBar {
     display: flex;
     margin-bottom: 5px;
     align-items: center;
+    justify-content: space-between;
+}
+
+div.nameContent {
+    display: flex;
+    align-items: center;
+    width: 80%;
 }
 
 span.temp {
     font-weight: 300;
     font-size: 7vw;
-    margin-left: 20px;
+    margin-left: 5%;
 }
 
 ul.weatherInfo {
@@ -105,6 +113,30 @@ li.infoElement {
     background-color: darksalmon;
     margin-bottom: 4px;
     padding: 6px 12px;
+}
+
+button {
+    font-family: Monospaced;
+    font-weight: 300;
+    float: right;
+    border: none;
+    border-radius: 50%;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+}
+
+button.plus {
+    font-size: 40px;
+    width: 50px;
+    height: 50px;
+    position: relative
+}
+
+button.close {
+    font-size: 5vw;
+    width: 6vw;
+    height: 6vw;
 }
 
 @media screen and (min-width: 1080px) {
@@ -139,5 +171,12 @@ li.infoElement {
     ul.weatherInfo {
         font-size: 20px;
     }
+
+    button.close {
+        font-size: 30px;
+        width: 40px;
+        height: 40px;
+    }
+
 
 }
