@@ -1,0 +1,86 @@
+body {
+    font-family: Montserrat;
+}
+
+div.mainTable {
+    margin: 10px 6% 5px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+div.tableElement {
+    padding: 7px;
+    width: 400px;
+    margin: 20px 40px 5px;
+    border: 3px dotted transparent;
+}
+
+.dotted {
+    border: black dotted 3px !important;
+}
+
+.mainMargin {
+    margin-bottom: 40px !important;
+}
+
+input {
+    border: none;
+    color: lightyellow;
+    background-color: darksalmon;
+    height: 42px;
+    width: 70%;
+    font-family: inherit;
+    font-size: 25px;
+    font-weight: 400;
+    padding-left: 12px;
+}
+
+input::placeholder {
+    color: lightyellow;
+}
+
+div.mainCity {
+    font-weight: 700;
+    font-size: 35px;
+}
+
+div.mainTemp {
+    font-weight: 300;
+    font-size: 50px;
+}
+
+div.nameBar {
+    display: flex;
+    font-weight: 700;
+    font-size: 25px;
+    margin-bottom: 5px;
+}
+
+div.nameBar div {
+    align-self: center;
+}
+
+div.nameBar span {
+    font-weight: 300;
+    font-size: 30px;
+    margin-left: 20px;
+}
+
+div.weatherInfo {
+
+}
+
+div.infoElement {
+    display: flex;
+    justify-content: space-between;
+    color: lightyellow;
+    background-color: darksalmon;
+    margin-bottom: 4px;
+    padding: 6px 12px;
+}
+
+div.title {
+    font-weight: 400;
+    font-size: 35px;
+}
