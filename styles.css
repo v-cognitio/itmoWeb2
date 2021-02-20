@@ -1,5 +1,27 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font-weight: inherit;
+    font-style: inherit;
+    font-size: 100%;
+    font-family: inherit;
+    vertical-align: baseline;
+}
+
 body {
     font-family: Montserrat;
+    line-height: 1;
+    background-color: #fefff8;
+    color: #530404;
 }
 
 main {
@@ -40,9 +62,19 @@ input::placeholder {
     color: lightyellow;
 }
 
-div.mainCity {
+h2 {
     font-weight: 700;
     font-size: 8vw;
+}
+
+h3 {
+    font-weight: 400;
+    font-size: 6vw;
+}
+
+h4 {
+    font-weight: 700;
+    font-size: 6vw;
 }
 
 div.mainTemp {
@@ -52,37 +84,27 @@ div.mainTemp {
 
 div.nameBar {
     display: flex;
-    font-weight: 700;
-    font-size: 6vw;
     margin-bottom: 5px;
+    align-items: center;
 }
 
-div.nameBar div {
-    align-self: center;
-}
-
-div.nameBar span {
+span.temp {
     font-weight: 300;
     font-size: 7vw;
     margin-left: 20px;
 }
 
-div.weatherInfo {
+ul.weatherInfo {
     font-size: 3vw;
 }
 
-div.infoElement {
+li.infoElement {
     display: flex;
     justify-content: space-between;
     color: lightyellow;
     background-color: darksalmon;
     margin-bottom: 4px;
     padding: 6px 12px;
-}
-
-div.title {
-    font-weight: 400;
-    font-size: 6vw;
 }
 
 @media screen and (min-width: 1080px) {
@@ -94,27 +116,28 @@ div.title {
         font-size: 20px;
     }
 
-    div.mainCity {
+    h2 {
         font-size: 40px;
+    }
+
+    h3 {
+        font-size: 35px;
+    }
+
+    h4 {
+        font-size: 35px;
     }
 
     div.mainTemp {
         font-size: 50px;
     }
 
-    div.nameBar {
-        font-size: 35px;
-    }
-
-    div.nameBar span {
+    span.temp {
         font-size: 45px;
     }
 
-    div.weatherInfo {
+    ul.weatherInfo {
         font-size: 20px;
     }
 
-    div.title {
-        font-size: 35px;
-    }
 }
