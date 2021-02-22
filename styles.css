@@ -63,6 +63,11 @@ input::placeholder {
     color: lightyellow;
 }
 
+h1 {
+    font-weight: 400;
+    font-size: 6vw;
+}
+
 h2 {
     font-weight: 700;
     font-size: 8vw;
@@ -138,13 +143,83 @@ button.close {
     height: 6vw;
 }
 
+button.geo {
+    width: 6vw;
+    height: 6vw;
+}
+
+div.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+div.title {
+
+}
+
+div.geo {
+    width: 6vw;
+    height: 6vw;
+}
+
+span.geoLaptop {
+    display: none;
+}
+
+span.geoMobile {
+    margin-left: 0.4vmin;
+    padding-top: 0.3vmin;
+    font-size: 3.5vw;
+    display: inline;
+    width: 100%;
+    height: 100%;
+}
+
 @media screen and (min-width: 1080px) {
     div.tableElement {
         width: 400px;
     }
 
+    div.header {
+        width: 900px;
+        display: flex;
+        align-items: center;
+        margin-left: 50px;
+        margin-right: 50px;
+    }
+
+    div.title {
+        width: 33.33%;
+    }
+
+    div.geo {
+        width: 66.66%;
+        height: 50px;
+    }
+
+    button.geo {
+        height: 100%;
+        width: 50%;
+        border-radius: 5px;
+        padding: 10px 20px;
+        font-weight: 400;
+    }
+
+    span.geoLaptop {
+        display: inline;
+    }
+
+    span.geoMobile {
+        display: none;
+    }
+
     input {
         font-size: 20px;
+    }
+
+    h1 {
+        font-size: 30px;
     }
 
     h2 {
