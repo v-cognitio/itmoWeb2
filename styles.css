@@ -71,6 +71,7 @@ h1 {
 h2 {
     font-weight: 700;
     font-size: 8vw;
+    margin-bottom: 7px;
 }
 
 h3 {
@@ -104,7 +105,7 @@ div.nameContent {
 span.temp {
     font-weight: 300;
     font-size: 7vw;
-    margin-left: 5%;
+    margin-left: 3%;
 }
 
 ul.weatherInfo {
@@ -168,12 +169,24 @@ span.geoLaptop {
 }
 
 span.geoMobile {
-    margin-left: 0.4vmin;
-    padding-top: 0.3vmin;
-    font-size: 3.5vw;
     display: inline;
+    margin-left: 0.5vmin;
+    padding-top: 0.1vmin;
+    font-size: 3.5vw;
     width: 100%;
     height: 100%;
+}
+
+img.bigIcon {
+    float: left;
+    height: 8.5vw;
+    margin-right: 3%;
+}
+
+img.smallIcon {
+    height: 7vw;
+    margin-left: 7%;
+    padding-bottom: 7px;
 }
 
 @media screen and (min-width: 1080px) {
@@ -235,7 +248,7 @@ span.geoMobile {
     }
 
     div.mainTemp {
-        font-size: 50px;
+        font-size: 70px;
     }
 
     span.temp {
@@ -252,5 +265,15 @@ span.geoMobile {
         height: 40px;
     }
 
+    img.bigIcon {
+        float: left;
+        height: 65px;
+        margin-right: 20px;
+    }
 
+    img.smallIcon {
+        height: 45px;
+        margin-left: 25px;
+        padding-bottom: 5px;
+    }
 }
