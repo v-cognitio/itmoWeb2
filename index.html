@@ -9,21 +9,21 @@
 </head>
 <body>
 
-<main>
-
-    <div class="tableElement header">
-        <div class="title">
-            <h1>Погода здесь</h1>
-        </div>
-
-        <div class="geo">
-            <button class="geo">
-                <span class="geoLaptop">Обновить геолокацию</span>
-                <span class="geoMobile">⟳</span>
-            </button>
-        </div>
-
+<header class="">
+    <div class="tableElement title">
+        <h1>Погода здесь</h1>
     </div>
+
+    <div class="tableElement title">
+        <button class="geo">
+            <span class="geoLaptop">Обновить геолокацию</span>
+            <span class="geoMobile">⟳</span>
+        </button>
+    </div>
+
+</header>
+
+<main>
 
     <div class="tableElement mainMargin">
         <h2>Санкт-Петербург</h2>
@@ -49,10 +49,10 @@
     </div>
 
     <div class="tableElement">
-        <h3>Избранное</h3>
+        <h2 class="fav">Избранное</h2>
     </div>
 
-    <div class="tableElement">
+    <div class="tableElement inputBox">
             <input placeholder="Добавить город" type="text">
             <button class="plus">+</button>
     </div>
@@ -60,7 +60,7 @@
     <div class="tableElement dotted">
         <div class="nameBar">
             <div class="nameContent">
-                <h4>Москва</h4>
+                <h3>Москва</h3>
                 <img src="icon.png" class="smallIcon">
                 <span class="temp">5℃</span>
             </div>
@@ -85,7 +85,32 @@
     <div class="tableElement dotted">
         <div class="nameBar">
             <div class="nameContent">
-                <h4>Москва</h4>
+                <h3>Москва</h3>
+                <img src="icon.png" class="smallIcon">
+                <span class="temp">5℃</span>
+            </div>
+            <button class="close">×</button>
+        </div>
+        <ul class="weatherInfo">
+            <li class="infoElement">
+                <div>Ветер</div>
+                <div>5.1 м/с</div>
+            </li>
+            <li class="infoElement">
+                <div>Облачность</div>
+                <div>Пасмурно</div>
+            </li>
+            <li class="infoElement">
+                <div>Давление</div>
+                <div>1012 мм рт. ст.</div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="tableElement dotted">
+        <div class="nameBar">
+            <div class="nameContent">
+                <h3>Москва</h3>
                 <img src="icon.png" class="smallIcon">
                 <span class="temp">5℃</span>
             </div>

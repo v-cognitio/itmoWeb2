@@ -24,17 +24,23 @@ body {
     color: #530404;
 }
 
+header {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    margin: 10px 5px;
+}
+
 main {
-    margin: 10px 3% 5px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    margin: 10px 5px;
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-column-gap: 5%;
 }
 
 div.tableElement {
-    padding: 7px 1%;
-    width: 95%;
-    margin: 20px 3% 5px;
+    padding: 7px 1.7%;
+    width: 90%;
+    margin: 20px 10px 5px;
     border: 3px dotted transparent;
 }
 
@@ -42,17 +48,13 @@ div.tableElement {
     border: black dotted 3px !important;
 }
 
-.mainMargin {
-    margin-bottom: 40px !important;
-}
-
 input {
     border: none;
     border-radius: 5px;
     color: lightyellow;
     background-color: darksalmon;
-    height: 50px;
-    width: 80%;
+    height: 100%;
+    width: 70%;
     font-family: inherit;
     font-size: 3vw;
     font-weight: 400;
@@ -74,12 +76,12 @@ h2 {
     margin-bottom: 7px;
 }
 
-h3 {
+h2.fav {
     font-weight: 400;
     font-size: 6vw;
 }
 
-h4 {
+h3 {
     font-weight: 700;
     font-size: 6vw;
 }
@@ -132,10 +134,9 @@ button {
 
 button.plus {
     float: right;
-    font-size: 40px;
-    width: 50px;
-    height: 50px;
-    position: relative
+    font-size: 5vw;
+    width: 6vw;
+    height: 6vw;
 }
 
 button.close {
@@ -156,7 +157,7 @@ div.header {
 }
 
 div.title {
-
+    margin: auto 10px;
 }
 
 div.geo {
@@ -190,9 +191,28 @@ img.smallIcon {
     padding-bottom: 7px;
 }
 
-@media screen and (min-width: 1300px) {
-    div.tableElement {
-        width: 30%;
+div.inputBox {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+@media screen and  (min-width: 768px) and (max-width: 1250px){
+    header {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        margin: 10px 10% 5px;
+    }
+
+    main {
+        margin: 10px 10% 5px;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-column-gap: 5%;
+    }
+
+    .mainMargin {
+        margin-bottom: 40px !important;
     }
 
     div.header {
@@ -203,8 +223,108 @@ img.smallIcon {
         margin-right: 0;
     }
 
-    div.title {
-        width: 33.33%;
+    div.geo {
+        width: 66.66%;
+        height: 50px;
+    }
+
+    button.geo {
+        height: 100%;
+        width: 100%;
+        border-radius: 5px;
+        padding: 10px 20px;
+        font-weight: 400;
+    }
+
+    span.geoLaptop {
+        display: inline;
+    }
+
+    span.geoMobile {
+        display: none;
+    }
+
+    input {
+        font-size: 15px;
+    }
+
+    h1 {
+        font-size: 20px;
+    }
+
+    h2 {
+        font-size: 40px;
+    }
+
+    h2.fav {
+        font-size: 35px;
+    }
+
+    h3 {
+        font-size: 25px;
+    }
+
+    div.mainTemp {
+        font-size: 65px;
+    }
+
+    span.temp {
+        font-size: 25px;
+    }
+
+    ul.weatherInfo {
+        font-size: 15px;
+    }
+
+    button.close {
+        font-size: 30px;
+        width: 40px;
+        height: 40px;
+    }
+
+    button.plus {
+        font-size: 30px;
+        width: 40px;
+        height: 40px;
+    }
+
+    img.bigIcon {
+        float: left;
+        height: 65px;
+        margin-right: 20px;
+    }
+
+    img.smallIcon {
+        height: 45px;
+        margin-left: 25px;
+        padding-bottom: 5px;
+    }
+}
+
+@media screen and (min-width: 1250px) {
+    header {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        margin: 10px 15% 5px;
+    }
+
+    main {
+        margin: 10px 15% 5px;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-column-gap: 5%;
+    }
+
+    .mainMargin {
+        margin-bottom: 40px !important;
+    }
+
+    div.header {
+        width: 68%;
+        display: flex;
+        align-items: center;
+        margin-left: 0;
+        margin-right: 0;
     }
 
     div.geo {
@@ -214,7 +334,7 @@ img.smallIcon {
 
     button.geo {
         height: 100%;
-        width: 50%;
+        width: 100%;
         border-radius: 5px;
         padding: 10px 20px;
         font-weight: 400;
@@ -240,11 +360,11 @@ img.smallIcon {
         font-size: 40px;
     }
 
-    h3 {
+    h2.fav {
         font-size: 35px;
     }
 
-    h4 {
+    h3 {
         font-size: 35px;
     }
 
@@ -261,6 +381,12 @@ img.smallIcon {
     }
 
     button.close {
+        font-size: 30px;
+        width: 40px;
+        height: 40px;
+    }
+
+    button.plus {
         font-size: 30px;
         width: 40px;
         height: 40px;
