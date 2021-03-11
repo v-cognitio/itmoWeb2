@@ -17,6 +17,10 @@ table, caption, tbody, tfoot, thead, tr, th, td, button {
     vertical-align: baseline;
 }
 
+button:hover {
+    background-color: red;
+}
+
 body {
     font-family: Montserrat;
     line-height: 1;
@@ -46,6 +50,13 @@ div.tableElement {
 
 .dotted {
     border: black dotted 3px !important;
+}
+
+div.clouds {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    margin-left: 7px;
 }
 
 input {
@@ -84,6 +95,8 @@ h2.fav {
 h3 {
     font-weight: 700;
     font-size: 6vw;
+
+
 }
 
 div.mainTemp {
@@ -108,6 +121,7 @@ span.temp {
     font-weight: 300;
     font-size: 7vw;
     margin-left: 3%;
+    float: right;
 }
 
 ul.weatherInfo {
@@ -186,9 +200,8 @@ img.bigIcon {
 }
 
 img.smallIcon {
-    height: 7vw;
+    height: 8vw;
     margin-left: 7%;
-    padding-bottom: 7px;
 }
 
 div.inputBox {
@@ -201,11 +214,11 @@ div.inputBox {
     header {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        margin: 10px 10% 5px;
+        margin: 10px 7% 5px;
     }
 
     main {
-        margin: 10px 10% 5px;
+        margin: 10px 7% 5px;
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         grid-column-gap: 5%;
@@ -297,7 +310,6 @@ div.inputBox {
     img.smallIcon {
         height: 45px;
         margin-left: 25px;
-        padding-bottom: 5px;
     }
 }
 
@@ -401,6 +413,5 @@ div.inputBox {
     img.smallIcon {
         height: 45px;
         margin-left: 25px;
-        padding-bottom: 5px;
     }
 }
