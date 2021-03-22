@@ -6,11 +6,11 @@ function updateByCoords(updater) {
             let lat = position.coords.latitude;
             let lon = position.coords.longitude;
             ans = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=40b59a908fc6450e086253153b78d13e&lang=ru`;
-            update(ans, updater);
+            update(ans, updater, document.querySelector('div.mainMargin'));
         },
         function (err) {
             ans = `https://api.openweathermap.org/data/2.5/weather?q=абу-даби&appid=40b59a908fc6450e086253153b78d13e&lang=ru`;
-            update(ans, updater);
+            update(ans, updater, document.querySelector('div.mainMargin'));
         });
 }
 
@@ -18,18 +18,26 @@ const selectByCity = (city) => {
     return `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=40b59a908fc6450e086253153b78d13e&lang=ru`
 }
 
-async function update(selector, updater) {
-    let result = true;
-    await fetch(selector)
-        .then(response => response.json())
-        .then(data => {
-            if (data.cod == 200) {
-                updater(data);
-            } else {
-                alert("Такой город не найден");
-                result = false;
-            }
-        });
+async function update(selector, updater, el = null) {
+    let result = 0;
+
+    try {
+        await fetch(selector)
+            .then(response => response.json())
+            .then(data => {
+                if (data.cod === 200) {
+                    updater(data);
+                    result = 200;
+                } else {
+                    result = 404;
+                }
+            });
+    } catch (err) {
+        if (el) {
+            makeInvalid(el);
+        }
+        result = -1;
+    }
     return result;
 }
 
@@ -40,7 +48,6 @@ function capFirstLet(string) {
 function updateMainCity(data) {
     document.querySelector('div.mainMargin h2').textContent = data.name;
     document.querySelector('div.mainMargin div.mainTemp').textContent = Math.round(data.main.temp) - 273 + "℃";
-
     document.querySelector('div.mainMargin ul li div.wind').textContent = data.wind.speed + " м/с";
     document.querySelector('div.mainMargin ul li div.clouds').textContent = capFirstLet(data.weather[0].description);
     document.querySelector('div.mainMargin ul li div.pressure').textContent = data.main.pressure + " мм рт. ст.";
@@ -50,14 +57,23 @@ function updateMainCity(data) {
 function updateFavourite(el, data) {
     el.querySelector('h3').textContent = data.name;
     el.querySelector('span.temp').textContent = Math.round(data.main.temp) - 273 + "℃";
-
     el.querySelector('div.wind').textContent = data.wind.speed + " м/с";
     el.querySelector('div.clouds').textContent = capFirstLet(data.weather[0].description);
     el.querySelector('div.pressure').textContent = data.main.pressure + " мм рт. ст.";
     el.querySelector('img').src = "http://openweathermap.org/img/w/" + data.weather[0].icon + ".png";
-
     el.querySelector('button.close').addEventListener('click', () => deleteCity(el, data.name));
+}
 
+function makeInvalid(el) {
+    var header = el.querySelector('h2');
+    if (header) {
+        header.textContent = "Ошибка загрузки";
+    }
+
+    header = el.querySelector('h3');
+    if (header) {
+        header.textContent = "Ошибка загрузки";
+    }
 }
 
 async function addCity() {
@@ -72,43 +88,35 @@ async function addCity() {
         cities = Array.of(city);
     }
 
-    var res = await placeCity(city);
+    var res = await placeCity(city, false);
     if (res) {
         localStorage.setItem("cities", JSON.stringify(cities));
     }
 }
 
-async function placeCity(city) {
-    var el = document.createElement('div');
-    el.innerHTML = '<div class="tableElement dotted">\n' +
-        '        <div class="nameBar">\n' +
-        '            <div class="nameContent">\n' +
-        '                <h3></h3>\n' +
-        '                <img src="icon.png" class="smallIcon">\n' +
-        '                <span class="temp">5℃</span>\n' +
-        '            </div>\n' +
-        '            <button class="close">×</button>\n' +
-        '        </div>\n' +
-        '        <ul class="weatherInfo">\n' +
-        '            <li class="infoElement">\n' +
-        '                <div>Ветер</div>\n' +
-        '                <div class="wind">5.1 м/с</div>\n' +
-        '            </li>\n' +
-        '            <li class="infoElement">\n' +
-        '                <div>Облачность</div>\n' +
-        '                <div class="clouds">Пасмурно</div>\n' +
-        '            </li>\n' +
-        '            <li class="infoElement">\n' +
-        '                <div>Давление</div>\n' +
-        '                <div class="pressure">1012 мм рт. ст.</div>\n' +
-        '            </li>\n' +
-        '        </ul>\n' +
-        '    </div>'
-    var res = await update(selectByCity(city), (data) => updateFavourite(el, data));
-    if (res) {
-        document.querySelector('main').appendChild(el);
-        return true;
+async function placeCity(city, loader = true) {
+    var el = document.querySelector('#tableElement').content.cloneNode(true);
+    document.querySelector('main').append(el);
+    el = document.querySelector('main').lastElementChild;
+
+    let prevDisplay = el.style.display;
+    if (!loader) {
+        el.style.display = 'none';
     }
+    var res = await update(selectByCity(city), (data) => updateFavourite(el, data));
+
+    if (res === 200) {
+        if (!loader) {
+            el.style.display = prevDisplay;
+        }
+        return true;
+    } else if (res === 404) {
+        el.remove();
+        alert("Такой город не найден");
+    } else if (res === -1) {
+        makeInvalid(el);
+    }
+
     return false;
 }
 
@@ -129,8 +137,12 @@ function updateCities() {
 }
 
 function init() {
-    document.querySelector('div.inputBox button').addEventListener('click', addCity);
-    document.querySelector('button.geo').addEventListener('click', () => updateByCoords(updateMainCity));
+    document.querySelector('form.addCity').addEventListener('submit', (event) => {
+        event.preventDefault();
+        addCity();
+    });
+    document.querySelector('button.geo').addEventListener('click',
+        () => updateByCoords(updateMainCity));
     updateByCoords(updateMainCity);
     updateCities();
 }

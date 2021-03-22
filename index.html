@@ -56,35 +56,39 @@
     </div>
 
     <div class="tableElement inputBox">
-        <input placeholder="Добавить город" type="text">
-        <button class="plus">+</button>
+        <form class="addCity">
+            <input placeholder="Добавить город" type="text">
+        </form>
+        <button class="plus" type="submit">+</button>
+
     </div>
 
-    <!--<div class="tableElement dotted">
+<template id="tableElement">
+    <div class="tableElement dotted">
         <div class="nameBar">
-            <div class="nameContent">
-                <h3>Москва</h3>
-                <img src="icon.png" class="smallIcon">
-                <span class="temp">5℃</span>
+             <div class="nameContent">
+                <h3></h3>
+                <img class="smallIcon">
+                <span class="temp">...</span>
             </div>
             <button class="close">×</button>
         </div>
         <ul class="weatherInfo">
             <li class="infoElement">
                 <div>Ветер</div>
-                <div>5.1 м/с</div>
+                <div class="wind">...</div>
             </li>
             <li class="infoElement">
                 <div>Облачность</div>
-                <div>Пасмурно</div>
+                <div class="clouds">...</div>
             </li>
             <li class="infoElement">
                 <div>Давление</div>
-                <div>1012 мм рт. ст.</div>
+                <div class="pressure">...</div>
             </li>
         </ul>
-    </div>-->
-
+    </div>
+</template>
 
 </main>
 
