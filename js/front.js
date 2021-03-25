@@ -1,21 +1,19 @@
-
-
 function updateByCoords(updater) {
     navigator.geolocation.getCurrentPosition(
         function (position) {
             let lat = position.coords.latitude;
             let lon = position.coords.longitude;
-            ans = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=40b59a908fc6450e086253153b78d13e&lang=ru`;
+            ans = `http://localhost:3000/weather/coordinates?lat=${lat}&lon=${lon}`;
             update(ans, updater, document.querySelector('div.mainMargin'));
         },
         function (err) {
-            ans = `https://api.openweathermap.org/data/2.5/weather?q=абу-даби&appid=40b59a908fc6450e086253153b78d13e&lang=ru`;
+            ans = `http://localhost:3000/weather/city?q=абу-даби`;
             update(ans, updater, document.querySelector('div.mainMargin'));
         });
 }
 
 const selectByCity = (city) => {
-    return `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=40b59a908fc6450e086253153b78d13e&lang=ru`
+    return `http://localhost:3000/weather/city?q=${city}`
 }
 
 async function update(selector, updater, el = null) {
@@ -54,14 +52,14 @@ function updateMainCity(data) {
     document.querySelector('div.mainMargin img').src = "http://openweathermap.org/img/w/" + data.weather[0].icon + ".png";
 }
 
-function updateFavourite(el, data) {
+function updateFavourite(el, data, city) {
     el.querySelector('h3').textContent = data.name;
     el.querySelector('span.temp').textContent = Math.round(data.main.temp) - 273 + "℃";
     el.querySelector('div.wind').textContent = data.wind.speed + " м/с";
     el.querySelector('div.clouds').textContent = capFirstLet(data.weather[0].description);
     el.querySelector('div.pressure').textContent = data.main.pressure + " мм рт. ст.";
     el.querySelector('img').src = "http://openweathermap.org/img/w/" + data.weather[0].icon + ".png";
-    el.querySelector('button.close').addEventListener('click', () => deleteCity(el, data.name));
+    el.querySelector('button.close').addEventListener('click', () => deleteCity(el, city));
 }
 
 function makeInvalid(el) {
@@ -76,21 +74,27 @@ function makeInvalid(el) {
     }
 }
 
+async function getCities() {
+    let cities;
+    await fetch("http://localhost:3000/features")
+        .then(response => response.json())
+        .then(data => {
+            cities = data;
+        })
+    return cities;
+}
+
 async function addCity() {
     var inputBox = document.querySelector('div.inputBox input');
-    var city = inputBox.value;
+    var city = inputBox.value.toLowerCase();
     inputBox.value = '';
-    var cities = localStorage.getItem("cities");
-    if (cities) {
-        cities = JSON.parse(cities);
-        cities.push(city.toLowerCase());
-    } else {
-        cities = Array.of(city);
-    }
 
     var res = await placeCity(city, false);
     if (res) {
-        localStorage.setItem("cities", JSON.stringify(cities));
+        await fetch('http://localhost:3000/features?city=' + city,
+            {
+                method: 'POST'
+            })
     }
 }
 
@@ -103,7 +107,7 @@ async function placeCity(city, loader = true) {
     if (!loader) {
         el.style.display = 'none';
     }
-    var res = await update(selectByCity(city), (data) => updateFavourite(el, data));
+    var res = await update(selectByCity(city), (data) => updateFavourite(el, data, city));
 
     if (res === 200) {
         if (!loader) {
@@ -120,17 +124,23 @@ async function placeCity(city, loader = true) {
     return false;
 }
 
-function deleteCity(el, name) {
-    el.remove();
-    var cities = JSON.parse(localStorage.getItem("cities"));
-    cities.splice(cities.indexOf(name.toLowerCase()), 1);
-    localStorage.setItem("cities", JSON.stringify(cities));
+function deleteCity(el, city) {
+    city = city.toLowerCase();
+    fetch('http://localhost:3000/features?city=' + city,
+        {
+            method: 'DELETE'
+        })
+        .then(res => {
+            if (res.status === 200) {
+                el.remove();
+            }
+        })
 }
 
-function updateCities() {
-    var cities = localStorage.getItem("cities");
+async function updateCities() {
+    let cities = await getCities();
     if (cities) {
-        for (let city of JSON.parse(cities)) {
+        for (let city of cities) {
             placeCity(city);
         }
     }
@@ -141,6 +151,7 @@ function init() {
         event.preventDefault();
         addCity();
     });
+    document.querySelector('button.plus').addEventListener('click', addCity);
     document.querySelector('button.geo').addEventListener('click',
         () => updateByCoords(updateMainCity));
     updateByCoords(updateMainCity);
