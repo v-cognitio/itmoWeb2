@@ -87,9 +87,15 @@ async function getCities() {
 async function addCity() {
     var inputBox = document.querySelector('div.inputBox input');
     var city = inputBox.value.toLowerCase();
+
+    if (!city) {
+        alert("Название города не может быть пустым");
+        return;
+    }
+
     inputBox.value = '';
 
-    var res = await placeCity(city, false);
+    var res = await placeCity(city);
     if (res) {
         await fetch('http://localhost:3000/features?city=' + city,
             {
@@ -124,17 +130,23 @@ async function placeCity(city, loader = true) {
     return false;
 }
 
-function deleteCity(el, city) {
+async function deleteCity(el, city) {
+    el.querySelector('button').disabled = true;
     city = city.toLowerCase();
-    fetch('http://localhost:3000/features?city=' + city,
-        {
-            method: 'DELETE'
-        })
-        .then(res => {
-            if (res.status === 200) {
-                el.remove();
-            }
-        })
+
+    try {
+        await fetch('http://localhost:3000/features?city=' + city,
+            {
+                method: 'DELETE'
+            })
+            .then(res => {
+                if (res.status === 200) {
+                    el.remove();
+                }
+            })
+    } catch (err) {
+        el.querySelector('button').disabled = false;
+    }
 }
 
 async function updateCities() {
